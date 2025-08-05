@@ -37,7 +37,7 @@
                      <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="">dirección de usuario registrado: </label>
+                                <label for="">dirección de paciente : </label>
                                 <p>{{$paciente->direccion}}</p>
                                  @error('direccion')
                                     <small style="color:red">{{ $message }}</small>
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <br/>
-                    <div class="row">
+                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="">Correo de usuario registrado: </label>
@@ -72,8 +72,48 @@
                             </div>
                         </div>
                     </div>
-                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Grupo sanguineo: </label>
 
+                                <p> {{ $paciente->grupo_sanguineo }}</p>
+
+                                 @error('email')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Enfermedades preexistentes: </label>
+
+                                <p> {{ $paciente->enfermedades_preexistentes }}</p>
+
+                                 @error('email')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Medicación actual: </label>
+
+                                <p> {{ $paciente->medicacion_actual }}</p>
+
+                                 @error('email')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
                     <hr>
 
                     <div class="row">
