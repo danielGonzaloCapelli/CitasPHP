@@ -25,8 +25,8 @@
                             <tr>
 
                                 <th scope="col">#</th>
-                                <th scope="col">Nombres</th>
-                                <th scope="col">Apellidos</th>
+                                <!--<th scope="col">Nombres</th>-->
+                                <th scope="col">Apellidos y apellidos</th>
                                 <th scope="col">DNI</th>
                                 <th scope="col">Nro cuil:</th>
                                 <th scope="col">Fecha de nacimiento</th>
@@ -42,8 +42,8 @@
                             @foreach ($pacientes as $paciente)
                                         <tr>
                                             <td>{{ $paciente->id }}
-                                            <td>{{ $paciente->nombres }} </td>
-                                            <td>{{ $paciente->apellidos }}</td>
+                                            <td>{{ $paciente->nombres }}  {{$paciente->apellidos}}</td>
+                                            <!--<td>{{ $paciente->apellidos }}</td>-->
                                             <td>{{ $paciente->dni }}</td>
                                             <td>{{ $paciente->nro_seguro_cuil }}</td>
                                             <td>{{ $paciente->fecha_nacimiento }}</td>

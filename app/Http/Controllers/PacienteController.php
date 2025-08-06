@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Paciente;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class PacienteController extends Controller
 {
@@ -35,7 +36,60 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try  {
+
+
+         $request->validate([
+            'nombres' => 'required|max:250',
+            'apellidos' => 'required|max:250',
+            'celular' => 'required|max:20',
+            'dni' => 'required|unique:pacientes',
+            'fecha_nacimiento' => 'required|date',
+            'nro_seguro_cuil' => 'required|max:18',
+            'direccion' => 'required|max:250',
+            'correo' => 'required|max:100',
+            'grupo_sanguineo' => 'required|max:4',
+            'alergias' => 'max:500',
+
+
+         ]);
+
+
+
+
+
+
+
+
+        $paciente = new Paciente();
+
+        $paciente->name = $request->name;
+        $paciente->apellidos = $request->apellidos;
+        $paciente->dni = $request->dni;
+        $paciente->celular = $request->celular;
+        $paciente->fecha_nacimiento = $request->fecha_nacimiento;
+        $paciente->direccion = $request->direccion;
+        $paciente->correo=$request->correo;
+
+        $paciente->save();
+
+        return redirect()->route(route: 'admin.pacientes.index')
+        ->with('mensaje','Se registró el paciente de forma correcta')
+        ->with('icono','success');
+        }
+        catch (ValidationException $e) {
+            return redirect()->back()
+                ->withErrors($e->validator)
+                ->withInput()
+                ->with('mensaje', 'Errores de validación')
+                ->with('icono', 'error');
+    }
+        catch (\Exception $e) {
+            return redirect()->back()
+                ->with('mensaje', 'Error al registrar la secretaria: ' . $e->getMessage())
+                ->with('icono', 'error');
+
+            }
     }
 
     /**
