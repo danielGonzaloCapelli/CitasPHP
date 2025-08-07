@@ -14,6 +14,7 @@ class PacienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
+       
         $pacientes = Paciente::all();
         return view('admin.pacientes.index', ['pacientes' => $pacientes]);
     }
@@ -36,6 +37,8 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
+       /*   $datos = request()->all();
+        return response()->json($datos);  */
         try  {
 
 
@@ -47,9 +50,16 @@ class PacienteController extends Controller
             'fecha_nacimiento' => 'required|date',
             'nro_seguro_cuil' => 'required|max:18',
             'direccion' => 'required|max:250',
-            'correo' => 'required|max:100',
+            'email' => 'required|max:100',
             'grupo_sanguineo' => 'required|max:4',
             'alergias' => 'max:500',
+            'genero' => 'required',
+            'enfermedades_preexistentes' => 'max:500',
+            'medicacion_actual' => 'max:500',
+            'contacto_emergencia' => 'min:12|max:100',
+            'observaciones' => 'max:250'
+
+
 
 
          ]);
@@ -63,13 +73,22 @@ class PacienteController extends Controller
 
         $paciente = new Paciente();
 
-        $paciente->name = $request->name;
+        $paciente->nombres = $request->nombres;
         $paciente->apellidos = $request->apellidos;
         $paciente->dni = $request->dni;
         $paciente->celular = $request->celular;
         $paciente->fecha_nacimiento = $request->fecha_nacimiento;
         $paciente->direccion = $request->direccion;
-        $paciente->correo=$request->correo;
+        $paciente->nro_seguro_cuil=$request->nro_seguro_cuil;
+        $paciente->email=$request->email;
+        $paciente->grupo_sanguineo=$request->grupo_sanguineo;
+        $paciente->enfermedades_preexistentes=$request->enfermedades_preexistentes;
+        $paciente->alergias=$request->alergias;
+        $paciente->medicacion_actual=$request->medicacion_actual;
+        $paciente->contacto_emergencia=$request->contacto_emergencia;
+        $paciente->observaciones = $request->observaciones;
+        $paciente->genero = $request->genero;
+
 
         $paciente->save();
 
@@ -111,9 +130,10 @@ class PacienteController extends Controller
      * @param  \App\Models\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function edit(Paciente $paciente)
+    public function edit(Paciente $paciente, $id)
     {
-        //
+        $paciente = Paciente::findOrFail($id);
+        return view('admin.pacientes.edit', compact('paciente'));
     }
 
     /**
@@ -123,10 +143,75 @@ class PacienteController extends Controller
      * @param  \App\Models\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Paciente $paciente)
+    public function update(Request $request,  $id)
     {
-        //
+         /* $datos = request()->all();
+        return response()->json($datos); */
+         try{
+
+            $request->validate([
+            'nombres' => 'required|max:250',
+            'apellidos' => 'required|max:250',
+            'celular' => 'required|max:20',
+            //'dni' => 'required|unique:paciente',
+            'fecha_nacimiento' => 'required|date',
+            'nro_seguro_cuil' => 'required|max:18',
+            'direccion' => 'required|max:250',
+            'email' => 'required|max:100',
+            'grupo_sanguineo' => 'required|max:4',
+            'alergias' => 'max:500',
+            'genero' => 'required',
+            'enfermedades_preexistentes' => 'max:500',
+            'medicacion_actual' => 'max:500',
+            'contacto_emergencia' => 'min:12|max:100',
+            'observaciones' => 'max:250'
+
+
+
+
+         ]);
+
+        $paciente = Paciente::find($id);
+
+        $paciente->nombres = $request->nombres;
+        $paciente->apellidos = $request->apellidos;
+        $paciente->dni = $request->dni;
+        $paciente->celular = $request->celular;
+        $paciente->fecha_nacimiento = $request->fecha_nacimiento;
+        $paciente->direccion = $request->direccion;
+        $paciente->nro_seguro_cuil=$request->nro_seguro_cuil;
+        $paciente->email=$request->email;
+        $paciente->grupo_sanguineo=$request->grupo_sanguineo;
+        $paciente->enfermedades_preexistentes=$request->enfermedades_preexistentes;
+        $paciente->alergias=$request->alergias;
+        $paciente->medicacion_actual=$request->medicacion_actual;
+        $paciente->contacto_emergencia=$request->contacto_emergencia;
+        $paciente->observaciones = $request->observaciones;
+        $paciente->genero = $request->genero;
+
+
+
+
+         $paciente->save();
+
+          return redirect()->route(route: 'admin.pacientes.index')
+        ->with('mensaje','Se actualizó al/el paciente de forma correcta')
+        ->with('icono','success');
     }
+        catch (ValidationException $e) {
+            return redirect()->back()
+                ->withErrors($e->validator)
+                ->withInput()
+                ->with('mensaje', 'Errores de validación')
+                ->with('icono', 'error');
+        }
+        catch (\Exception $e) {
+            return redirect()->back()
+                ->with('mensaje', 'Error al actualizar el paciente: ' . $e->getMessage())
+                ->with('icono', 'error');
+        }
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -134,8 +219,19 @@ class PacienteController extends Controller
      * @param  \App\Models\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Paciente $paciente)
+       public function confirmDelete($id){
+        $paciente = Paciente::findOrFail($id);
+
+        return view('admin.pacientes.delete', compact('paciente'));
+    }
+    public function destroy( $id)
     {
-        //
+
+
+        $paciente = Paciente::findOrFail($id);
+        $paciente->delete();
+        return redirect()->route(route: 'admin.pacientes.index')
+         ->with('mensaje','Se borró a la secretaria de forma correcta')
+         ->with('icono','success');
     }
 }

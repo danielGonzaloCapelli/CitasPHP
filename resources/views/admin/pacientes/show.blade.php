@@ -1,15 +1,15 @@
 @extends('layouts.admin')
 @section('content')
     <div class="row">
-        <h1> Datos de usuario:  {{ $paciente->name . ' ' . $paciente->apellidos}} </h1>
+        <h1> Datos del paciente:</h1>
     </div>
     <hr>
 
     <div class="row">
-        <div class="col-md-6">
-            <div class="card card-outline card-info">
+        <div class="col-md-12">
+            <div class="card card-outline card-primary">
               <div class="card-header">
-                <h3 class="card-title">Datos registrados</h3>
+                <h3 class="card-title">Datos de paciente: {{ $paciente->nombres }} {{ $paciente->apellidos }}</h3>
 
                 <div class="card-tools">
 
@@ -19,12 +19,12 @@
               <!-- /.card-header -->
               <div class="card-body" style="display: block;">
 
-                    @csrf
+
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="" name="name">Nombre paciente: </label>
-                                <p>{{$paciente->nombres . ' ' . $paciente->apellidos }}</p>
+                                <label for="">Nombres: </label> <b>*</b>
+                                <input type="text" value="{{$paciente->nombres}}" name="nombres"  class="form-control" disabled/>
                                 @error('name')
                                     <small style="color:red">{{ $message }}</small>
                                 @enderror
@@ -32,89 +32,154 @@
 
                             </div>
                         </div>
-                    </div>
-                    <br/>
-                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="">dirección de paciente : </label>
-                                <p>{{$paciente->direccion}}</p>
-                                 @error('direccion')
+                                <label for="">Apellidos: </label> <b>*</b>
+                                <input type="text" value="{{$paciente->apellidos}}" name="apellidos"  class="form-control" disabled/>
+                                @error('apellidos')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">fecha de nacimiento: </label> <b>*</b>
+                                <input type="date" value="{{$paciente->fecha_nacimiento}}" name="fecha_nacimiento"  class="form-control" disabled/>
+                                @error('fecha_nacimiento')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+
+
+                            </div>
+                        </div>
+                         <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Nro documento: </label> <b>*</b>
+                                <input type="text" value="{{$paciente->dni}}" name="dni"  class="form-control" disabled/>
+                                @error('dni')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+
+
+                            </div>
+                        </div>
+                         <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="cuil">Cuil: </label> <b>*</b>
+                                <input type="text" value="{{$paciente->nro_seguro_cuil}}" name="nro_seguro_cuil"  class="form-control" disabled/>
+                                @error('nro_seguro_cuil')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="direccion">Dirección: </label> <b>*</b>
+                                <input type="text" value="{{$paciente->direccion}}" name="direccion"  class="form-control" disabled/>
+                                @error('direccion')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Nro teléfono/celular: </label> <b>*</b>
+                                <input type="text" value="{{$paciente->celular}}" name="celular"  class="form-control" disabled/>
+                                @error('celular')
                                     <small style="color:red">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
-                    </div>
-                    <br/>
-                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="">teléfono o cel registrado: </label>
-                                <!--Esta funcionalidad es de prueba ya que no tengo al momento cuenta empresarial -->
-                               <p><a href="https://wa.me/{{ $paciente->celular }}?text={{ urlencode("Hola, confirmo que completé el registro en el sistema.")}}">{{ $paciente->celular }}</a></p>
-                                 @error('celular')
-                                    <small style="color:red">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <br/>
-                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="">Correo de usuario registrado: </label>
-
-                                <p><a href="mailto:{{ $paciente->email }}?subject=Consulta&body=Hola, quisiera hacer una consulta.">{{ $paciente->email }}</a></p>
-
+                                <label for="">Correo de paciente: </label> <b>*</b>
+                                <input type="email" value="{{$paciente->email}}" name="email"  class="form-control" disabled/>
                                  @error('email')
                                     <small style="color:red">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
+
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="">Grupo sanguineo: </label>
-
-                                <p> {{ $paciente->grupo_sanguineo }}</p>
-
-                                 @error('email')
+                                <label for="">Género: </label> <b>*</b>
+                                <input type="text" value="{{$paciente->genero}}" name="genero" class="form-control" disabled/>
+                                 @error('genero')
                                     <small style="color:red">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-12">
+
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="">Enfermedades preexistentes: </label>
-
-                                <p> {{ $paciente->enfermedades_preexistentes }}</p>
-
-                                 @error('email')
+                                <label for="">Grupo sanguineo: </label> <b>*</b>
+                                <input type="text"   value="{{$paciente->grupo_sanguineo}}" name="grupo_sanguineo" class="form-control" disabled/>
+                                 @error('grupo_sanguineo')
                                     <small style="color:red">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-12">
+
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="">Medicación actual: </label>
-
-                                <p> {{ $paciente->medicacion_actual }}</p>
-
-                                 @error('email')
+                                <label for="">Alergias: </label>
+                                <input type="text"   value="{{$paciente->alergias}}" name="alergias" class="form-control" disabled/>
+                                 @error('alergias')
                                     <small style="color:red">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
+
+                        <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Enfermedades preexistentes: </label>
+                                    <textarea rows="4" cols="50" value="{{ $paciente->enfermedades_preexistentes }}" name="enfermedades_preexistentes" class="form-control" disabled>{{ $paciente->enfermedades_preexistentes }}</textarea>
+                                    @error('enfermedades_preexistentes')
+                                        <small style="color:red">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Está medicado? enumerar: </label>
+                                <textarea rows="4" cols="50" value="{{ $paciente->medicacion_actual }}" name="medicacion_actual" class="form-control" disabled>{{ $paciente->medicacion_actual }}</textarea>
+                                 @error('medicacion_actual')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="">Contacto de emergencia: </label><b>*</b>
+                               <input type="text" class="form-control" name="contacto_emergencia" value="{{ $paciente->contacto_emergencia }}" disabled/>
+                                 @error('contacto_emergencia')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Observaciones: </label><b>*</b>
+                               <input type="text" class="form-control" name="observaciones" value="{{ $paciente->observaciones }}" disabled/>
+                                 @error('observaciones')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+
                     </div>
-                    <br/>
-                    <hr>
+                    </br>
+
 
                     <div class="row">
                         <div class="col-md-12">

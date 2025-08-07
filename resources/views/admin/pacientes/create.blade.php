@@ -18,13 +18,13 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body" style="display: block;">
-                <form action="{{ url('/admin/pacientes/store') }}" method="POST"  >
+                <form action="{{ url('/admin/pacientes/create') }}" method="POST"  >
                     @csrf
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="">Nombres: </label> <b>*</b>
-                                <input type="text" value="{{old('nombres')}}" name="name"  class="form-control" required/>
+                                <input type="text" value="{{old('nombres')}}" name="nombres"  class="form-control" required/>
                                 @error('name')
                                     <small style="color:red">{{ $message }}</small>
                                 @enderror
@@ -78,6 +78,18 @@
                             </div>
                         </div>
 
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="direccion">Dirección: </label> <b>*</b>
+                                <input type="text" value="{{old('direccion')}}" name="direccion"  class="form-control" required/>
+                                @error('direccion')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+
+
+                            </div>
+                        </div>
+
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="">Nro teléfono/celular: </label> <b>*</b>
@@ -90,8 +102,8 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="">Correo de paciente: </label> <b>*</b>
-                                <input type="email" value="{{old('correo')}}" name="correo"  class="form-control" required/>
-                                 @error('correo')
+                                <input type="email" value="{{old('email')}}" name="email"  class="form-control" required/>
+                                 @error('email')
                                     <small style="color:red">{{ $message }}</small>
                                 @enderror
                             </div>
@@ -100,7 +112,11 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="">Género: </label> <b>*</b>
-                                <input type="text" value="{{old('genero')}}" name="genero" class="form-control" required/>
+                                <select name="genero" class="form-control">
+                                    <option value="M">MASCULINO</option>
+                                    <option value="F">FEMENINO</option>
+                                    
+                                </select>
                                  @error('genero')
                                     <small style="color:red">{{ $message }}</small>
                                 @enderror
@@ -110,7 +126,15 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="">Grupo sanguineo: </label> <b>*</b>
-                                <input type="text"   value="{{old('grupo_sanguineo')}}" name="grupo_sanguineo" class="form-control" required/>
+                                <select  name="grupo_sanguineo" id="" class="form-control" >
+                                    <option value="A+">A+</option>
+                                    <option value="A+">A-</option>
+                                    <option value="A+">B+</option>
+                                    <option value="A+">B-</option>
+                                    <option value="A+">O+</option>
+                                    <option value="A+">O-</option>
+
+                                </select>
                                  @error('grupo_sanguineo')
                                     <small style="color:red">{{ $message }}</small>
                                 @enderror
@@ -130,8 +154,8 @@
                         <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Enfermedades preexistentes: </label>
-                                    <textarea rows="4" cols="50" value="{{ old('enfermedades_prexistentes') }}" name="enfermedades_prexistentes" class="form-control">Escribe tu mensaje aquí...</textarea>
-                                    @error('enfermedades_prexistentes')
+                                    <textarea rows="4" cols="50" value="{{ old('enfermedades_preexistentes') }}" name="enfermedades_preexistentes" class="form-control">Escribe tu mensaje aquí...</textarea>
+                                    @error('enfermedades_preexistentes')
                                         <small style="color:red">{{ $message }}</small>
                                     @enderror
                                 </div>
