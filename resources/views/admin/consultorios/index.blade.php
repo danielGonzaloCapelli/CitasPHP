@@ -2,18 +2,18 @@
 
 @section('content')
     <div class="row">
-        <h1 class="display-5"> Listado de secretarias </h1>
+        <h1 class="display-5"> Listado de Consultorios </h1>
 
     </div>
     <hr>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <div class="card card-outline card-primary">
               <div class="card-header">
-                <h3 class="card-title">Secretarias registradas</h3>
+                <h3 class="card-title">Consultorios registrados</h3>
 
                 <div class="card-tools">
-                  <a href={{url('admin/secretarias/create')  }} class="btn btn-primary">Crear secretaria</a>
+                  <a href={{ url('admin/consultorios/create') }} class="btn btn-primary">Crear consultorio</a>
                 </div>
                 <!-- /.card-tools -->
               </div>
@@ -25,34 +25,31 @@
                             <tr>
 
                                 <th scope="col">#</th>
-                                <th scope="col">Nombres</th>
-                                <th scope="col">Apellidos</th>
-                                <th scope="col">DNI</th>
-                                <th scope="col">Fecha de nacimiento</th>
-                                <th scope="col">Dirección</th>
-                                <th scope="col">Celular</th>
-                                <th scope="col">Email</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Ubicación</th>
+                                <th scope="col">Especialidad</th>
+                                <th scope="col">Teléfono/Interno</th>
+                                <th scope="col">Capacidad</th>
+                                <th scope="col">Habilitado</th>
                                 <th scope="col">Acciones</th>
 
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($secretarias as $secretaria)
+                            @foreach ($consultorios as $consultorio)
                                         <tr>
-                                            <td>{{ $secretaria->id }}
-                                            <td>{{ $secretaria->name }}</td>
-                                            <td>{{ $secretaria->apellidos }}</td>
-                                            <td>{{ $secretaria->dni }}</td>
-                                            <td>{{ $secretaria->fecha_nacimiento }}</td>
-                                            <td>{{ $secretaria->direccion }}</td>
-                                            <td>{{ $secretaria->celular }}</td>
-                                            <td>{{ $secretaria->user->email }}</td>
-
+                                            <td>{{ $consultorio->id }}
+                                            <td>{{ $consultorio->nombre }}</td>
+                                            <td>{{ $consultorio->ubicacion }}</td>
+                                            <td>{{ $consultorio->especialidad }}</td>
+                                            <td>{{ $consultorio->telefono }}</td>
+                                            <td>{{ $consultorio->capaciadad }}</td>
+                                            <td>{{ $consultorio->estado }}</td>
                                             <td style="text-align:center">
                                                  <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <a href="{{ url('admin/secretarias/show/'.$secretaria->id) }}" type="button" class="btn btn-info btn-sm"><i class="bi bi-eye"></i></a>
-                                                    <a href="{{ url('admin/secretarias/'.$secretaria->id .'/edit') }}" type="button" class="btn btn-success btn-sm"><i class="bi bi-pencil"></i></a>
-                                                    <a href="{{ url('admin/secretarias/'.$secretaria->id. '/confirm-delete') }}" type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                                                    <a href="{{ url('admin/consultorios/show/'.$consultorio->id) }}" type="button" class="btn btn-info btn-sm"><i class="bi bi-eye"></i></a>
+                                                    <a href="{{ url('admin/consultorios/'.$consultorio->id .'/edit') }}" type="button" class="btn btn-success btn-sm"><i class="bi bi-pencil"></i></a>
+                                                    <a href="{{ url('admin/consultorios/'.$consultorio->id. '/confirm-delete') }}" type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -66,12 +63,12 @@
                                 "pageLength": 10,
                                 "language": {
                                     "emptyTable": "No hay información",
-                                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Secretarias",
-                                    "infoEmpty": "Mostrando 0 a 0 de 0 Secretarias",
-                                    "infoFiltered": "(Filtrado de _MAX_ total Secretarias)",
+                                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Consultorios",
+                                    "infoEmpty": "Mostrando 0 a 0 de 0 Consultorios",
+                                    "infoFiltered": "(Filtrado de _MAX_ total Consultorios)",
                                     "infoPostFix": "",
                                     "thousands": ",",
-                                    "lengthMenu": "Mostrar _MENU_ Secretarias",
+                                    "lengthMenu": "Mostrar _MENU_ Consultorios",
                                     "loadingRecords": "Cargando...",
                                     "processing": "Procesando...",
                                     "search": "Buscador:",

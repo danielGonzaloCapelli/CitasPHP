@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Consultorio;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class ConsultorioController extends Controller
 {
@@ -14,6 +15,8 @@ class ConsultorioController extends Controller
      */
     public function index()
     {
+        $consultorios = Consultorio::all();
+        return view('admin.consultorios.index', ['consultorios' => $consultorios]);
         //
     }
 
@@ -24,7 +27,8 @@ class ConsultorioController extends Controller
      */
     public function create()
     {
-        //
+        //Devolucion de vista para agregar consultorio
+          return view('admin.consultorios.create');
     }
 
     /**
@@ -35,7 +39,47 @@ class ConsultorioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         /*  $datos = request()->all();
+        return response()->json($datos); */
+        try{
+
+             $request->validate([
+            'nombre' => 'required|max:100',
+            'ubicacion' => 'required|max:100',
+            'capaciadad' => 'required|max:20',
+            'telefono' => 'required',
+            'especialidad' => 'required',
+            'estado' => 'required|max:20'
+
+        ]);
+        $consultorio= new Consultorio();
+
+        $consultorio->nombre=$request->nombre;
+        $consultorio->ubicacion=$request->ubicacion;
+        $consultorio->telefono=$request->telefono;
+        $consultorio->especialidad=$request->especialidad;
+        $consultorio->capaciadad = $request->capaciadad;
+        $consultorio->estado=$request->estado;
+
+        $consultorio->save();
+         return redirect()->route(route: 'admin.consultorios.index')
+        ->with('mensaje','Se registró el paciente de forma correcta')
+        ->with('icono','success');
+        } catch (ValidationException $e) {
+            return redirect()->back()
+                ->withErrors($e->validator)
+                ->withInput()
+                ->with('mensaje', 'Errores de validación')
+                ->with('icono', 'error');
+    }
+        catch (\Exception $e) {
+            return redirect()->back()
+                ->with('mensaje', 'Error al registrar la secretaria: ' . $e->getMessage())
+                ->with('icono', 'error');
+
+            }
+
+
     }
 
     /**
@@ -44,9 +88,11 @@ class ConsultorioController extends Controller
      * @param  \App\Models\Consultorio  $consultorio
      * @return \Illuminate\Http\Response
      */
-    public function show(Consultorio $consultorio)
+    public function show($id)
     {
-        //
+        $consultorio = Consultorio::findOrFail($id);
+
+        return view('admin.consultorios.show', compact('consultorio'));
     }
 
     /**
@@ -55,9 +101,10 @@ class ConsultorioController extends Controller
      * @param  \App\Models\Consultorio  $consultorio
      * @return \Illuminate\Http\Response
      */
-    public function edit(Consultorio $consultorio)
+    public function edit($id)
     {
-        //
+        $consultorio = Consultorio::find($id);
+        return view('admin.consultorios.edit', compact('consultorio'));
     }
 
     /**
@@ -67,9 +114,10 @@ class ConsultorioController extends Controller
      * @param  \App\Models\Consultorio  $consultorio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Consultorio $consultorio)
+    public function update( $id)
     {
-        //
+
+
     }
 
     /**
