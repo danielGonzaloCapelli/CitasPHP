@@ -14,7 +14,7 @@ class PacienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-       
+
         $pacientes = Paciente::all();
         return view('admin.pacientes.index', ['pacientes' => $pacientes]);
     }
@@ -219,11 +219,12 @@ class PacienteController extends Controller
      * @param  \App\Models\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-       public function confirmDelete($id){
+    public function confirmDelete($id){
         $paciente = Paciente::findOrFail($id);
 
         return view('admin.pacientes.delete', compact('paciente'));
     }
+    
     public function destroy( $id)
     {
 

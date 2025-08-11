@@ -253,11 +253,43 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </ul>
           </li>
           <!-- fin consultorios -->
+
+
+          <!--Inicio doctores -->
+
+           <li class="nav-item">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                    Doctores
+                <!--<i class="right fas fa-angle-left"></i>-->
+               <i class="ion fas bi bi-prescription"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('admin/doctores/create') }}" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Creación de Doctores</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('admin/doctores') }}" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Listado de Doctores</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!--Fin doctores-->
+
+
           <li class="nav-item">
             <a href="#" class="nav-link" style="background-color:#a9200e">
               <i class="nav-icon fas bi bi-door-closed-fill"></i>
               <p>
                 Cerrar sesión
+                
 
               </p>
             </a>

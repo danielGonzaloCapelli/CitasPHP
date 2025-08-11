@@ -14,7 +14,11 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        //
+        $doctor=Doctor::all();
+        $doctores = Doctor::with(relations:'user')->get();
+
+
+        return view('admin.doctores.index', compact('doctores'));
     }
 
     /**

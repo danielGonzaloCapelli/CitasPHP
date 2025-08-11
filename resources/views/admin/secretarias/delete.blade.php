@@ -75,29 +75,7 @@
                         </div>
                     </div>
                     <br/>
-                   {{--  <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="">Password: </label> <b>*</b>
-                                <input type="password" value="{{old('password')}}" name="password" value={{ old('password') }} class="form-control" required/>
-                                 @error('password')
-                                    <small style="color:red">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="">Reingrese su password: </label> <b>*</b>
-                                <input type="password"   value="{{old('password_confirmation')}}" name="password_confirmation" class="form-control" required/>
-                                 @error('password_confirmation')
-                                    <small style="color:red">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div>
-                    </div> --}}
+                  
                     <hr>
 
                     <div class="row">

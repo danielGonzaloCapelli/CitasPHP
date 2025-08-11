@@ -88,35 +88,7 @@
                                 @enderror
                             </div>
                         </div>
-                       {{--  <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="">Especialidad: </label>
-                                <input type="text" value="{{ $consultorio->especialidad }}" name="especialidad"  class="form-control" />
-                                 @error('especialidad')
-                                    <small style="color:red">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div> --}}
-                        <br/>
-                        {{-- div class="col-md-6">
-                            <div class="form-group">
-                                <label for="">Estado: </label>
-                                <input type="text" value="{{'estado'}}" name="estado" class="form-control" />
-                                 @error('estado')
-                                    <small style="color:red">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div> --}}
-
-                        {{-- <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="">Reingrese su password: </label>
-                                <input type="password"   value="{{old('password_confirmation')}}" name="password_confirmation" class="form-control" />
-                                 @error('password_confirmation')
-                                    <small style="color:red">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div> --}}
+                       
                     </div>
 
 

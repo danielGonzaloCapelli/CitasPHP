@@ -114,9 +114,61 @@ class ConsultorioController extends Controller
      * @param  \App\Models\Consultorio  $consultorio
      * @return \Illuminate\Http\Response
      */
-    public function update( $id)
+    public function update(Request $request, $id)
     {
 
+         try{
+
+            $request->validate([
+
+
+
+            'nombre' => 'required|max:100',
+            'ubicacion' => 'required|max:100',
+            'capaciadad' => 'required|max:20',
+            'telefono' => 'required',
+            'especialidad' => 'required',
+            'estado' => 'required|max:20'
+
+        ]);
+
+
+
+
+
+
+        $consultorio = Consultorio::find($id);
+
+        $consultorio->nombre=$request->nombre;
+        $consultorio->ubicacion=$request->ubicacion;
+        $consultorio->telefono=$request->telefono;
+        $consultorio->especialidad=$request->especialidad;
+        $consultorio->capaciadad = $request->capaciadad;
+        $consultorio->estado=$request->estado;
+
+        $consultorio->save();
+
+
+
+
+
+
+          return redirect()->route(route: 'admin.consultorios.index')
+            ->with('mensaje','Se actualizó el consultorio de forma correcta')
+         ->with('icono','success');
+    }
+        catch (ValidationException $e) {
+            return redirect()->back()
+                ->withErrors($e->validator)
+                ->withInput()
+                ->with('mensaje', 'Errores de validación')
+                ->with('icono', 'error');
+        }
+        catch (\Exception $e) {
+            return redirect()->back()
+                ->with('mensaje', 'Error al actualizar el consultorio: ' . $e->getMessage())
+                ->with('icono', 'error');
+        }
 
     }
 
@@ -126,8 +178,36 @@ class ConsultorioController extends Controller
      * @param  \App\Models\Consultorio  $consultorio
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Consultorio $consultorio)
+     public function confirmDelete($id){
+        $consultorio = Consultorio::findOrFail($id);
+
+        return view('admin.consultorios.delete', compact('consultorio'));
+    }
+
+    public function destroy( $id)
     {
-        //
+         /*  $datos = request()->all();
+        return response()->json($datos); */
+        try{
+             $consultorio = Consultorio::findOrFail($id);
+            $consultorio->delete();
+            return redirect()->route(route: 'admin.consultorios.index')
+            ->with('mensaje','Se borró consultorio de forma correcta')
+            ->with('icono','success');
+        }
+         catch (ValidationException $e) {
+            return redirect()->back()
+                ->withErrors($e->validator)
+                ->withInput()
+                ->with('mensaje', 'Errores de validación')
+                ->with('icono', 'error');
+        }
+        catch (\Exception $e) {
+            return redirect()->back()
+                ->with('mensaje', 'Error al actualizar el consultorio: ' . $e->getMessage())
+                ->with('icono', 'error');
+        }
+
+
     }
 }

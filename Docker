@@ -1,0 +1,38 @@
+# Imagen base con PHP 8.2 y Apache
+FROM php:8.2-apache
+
+# Instala dependencias del sistema
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    libzip-dev \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    curl \
+    npm \
+    && docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl bcmath gd
+
+# Instala Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Habilita mod_rewrite para Laravel
+RUN a2enmod rewrite
+
+# Copia el código fuente
+COPY . /var/www/html
+
+# Establece el directorio de trabajo
+WORKDIR /var/www/html
+
+# Da permisos a Laravel
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html/storage \
+    && chmod -R 755 /var/www/html/bootstrap/cache
+
+# Expone el puerto 80
+EXPOSE 80
+
+# Comando por defecto
+CMD ["apache2-foreground"]

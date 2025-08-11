@@ -48,7 +48,10 @@
               <a href="{{url('admin/pacientes')}}" class="small-box-footer">Mas información <i class="fas bi bi-file-person"></i></a>
             </div>
           </div>
-            <div class="col-lg-3 col-6">
+          <!-- Fin pacientes-->
+
+          <!--Inicio consultorios -->
+           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
@@ -57,12 +60,31 @@
                 <p>Consultorios</p>
               </div>
               <div class="icon">
-                    <i class="ion fas bi bi-building-check"></i>
+                    <i class="ion fas bi bi-person-fill-down"></i>
               </div>
               <a href="{{url('admin/consultorios')}}" class="small-box-footer">Mas información <i class="fas bi bi-file-person"></i></a>
             </div>
           </div>
+
+
+
+
     </div>
+    <!-- Fila 2: Médicos -->
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>{{$total_doctor}}</h3>
+                    <p>Médicos</p>
+                </div>
+                <div class="icon">
+                    <i class="ion fas bi bi-prescription"></i>
+                </div>
+                <a href="{{url('admin/doctores')}}" class="small-box-footer">Más información <i class="fas bi bi-prescription2"></i></a>
+                </div>
+            </div>
+        </div>
 
 
 @endsection

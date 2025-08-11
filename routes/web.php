@@ -113,7 +113,7 @@ Route::get('/admin/consultorios/{id}/confirm-delete', [App\Http\Controllers\Cons
 
 Route::delete('/admin/consultorios/{id}', [App\Http\Controllers\ConsultorioController::class, 'destroy'])->name('admin.consultorios.destroy')->middleware('auth');
 
-/* //Rutas doctores
+ //Rutas doctores
 
 
 Route::get('/admin/doctores', [App\Http\Controllers\DoctorController::class, 'index'])->name('admin.doctores.index')->middleware('auth');
@@ -134,4 +134,5 @@ Route::get('/admin/doctores/{id}/confirm-delete', [App\Http\Controllers\DoctorCo
 
 Route::delete('/admin/doctores/{id}', [App\Http\Controllers\DoctorController::class, 'destroy'])->name('admin.doctores.destroy')->middleware('auth');
 
- */
+//Rutas Horarios----------------------------------------------------------------------------------------------------------------------------------
+
