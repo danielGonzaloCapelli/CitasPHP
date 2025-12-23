@@ -21,13 +21,8 @@ return new class extends Migration
 
             $table->timestamps();
 
-            $table->unsignedBigInteger(column:'doctors_id');
-            $table->unsignedBigInteger(column:'consultorios_id');
-
-
-           $table->foreignId('doctors_id')->references('id')->on('doctors')->onDelete(action:'cascade');
-
-           $table->foreignId('consultorios_id')->references('id')->on('consultorios')->onDelete('cascade');
+            $table->foreignId('doctors_id')->constrained('doctors')->onDelete('cascade');
+            $table->foreignId('consultorios_id')->constrained('consultorios')->onDelete('cascade');
 
         });
     }

@@ -20,39 +20,40 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         \App\Models\User::factory(10)->create();
+        
 
-        \App\Models\User::factory()->create([
+        \App\Models\User::create([
              'name' => 'Test User',
-             'email' => 'test@example.com',
+             'email' => fake()->unique()->safeEmail(),
+              'password' => Hash::make(value: '12345678')
          ]);
 
-          User::Create([
+           User::Create([
             'name' =>'Administrador',
             'email' => 'admin@admin.com',
             'password' => Hash::make(value: '12345678')
 
-         ]);
+         ]); 
 
           User::Create([
             'name' =>'Secretaria',
-            'email' => 'secretaria@admin.com',
+            'email' => fake()->unique()->safeEmail(),
             'password' => Hash::make(value: '12345678')
 
          ]);
           User::Create([
             'name' =>'Doctor1',
-            'email' => 'doctro1@admin.com',
+            'email' => fake()->unique()->safeEmail(),
             'password' => Hash::make(value: '12345678')
 
          ]);
           User::Create([
             'name' =>'Paciente1',
-            'email' => 'paciente1@admin.com',
+            'email' => fake()->unique()->safeEmail(),
             'password' => Hash::make(value: '12345678')
 
-         ]); 
+         ]);
 
-         $this->call(PacienteSeeder::class);
+         //$this->call(PacienteSeeder::class);
     }
 }
